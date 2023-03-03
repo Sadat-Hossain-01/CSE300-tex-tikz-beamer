@@ -98,7 +98,8 @@ Our contributions can be summarized as:
 The basic pipeline of FPN is presented in \autoref{fig:fig2}. We aggregate global features from the input points with a set of multilevel perceptions (MLPs) and Max Pooling following PointNet \cite{qi2017pointnet}.
 
 \subsection{Hybrid Training Strategy}
-The achievement of HTS is presented as Algorithm \autoref{alg:algo-1}.
+% cross-reference with custom text
+The achievement of HTS is presented as \hyperref[alg:algo-1]{Algorithm 1}.
 
 \subsection{Loss Function}
 The range constraint can be presented as
@@ -118,6 +119,18 @@ or
  \mathcal{L}_{task} = \mathcal{L}_{EMD}(S_1, S_2) = \min_{\phi : S_1 \rightarrow S_2} \frac{1}{|S_1|}\sum_{x \epsilon S_1} \|x-\phi(x) \|_2.
 \end{equation}
 where $S_1$ and $S_2$ are input and output. $\phi$ is a bijection from $S_1$ to $S_2$.
+
+\end{multicols}
+
+\begin{figure}[h]
+\centering
+ \includegraphics[width=\linewidth]{images/fig2.png}
+ \captionsetup{justification=justified, labelsep=period}
+ \caption{The whole pipeline of FPN. The + denotes element-wised addition. $f_1$ and $f_2$ aggregate features by MultiLayer Perceptrons(MLPs) and pooling, while $f_3$ is a group of MLPs to predict offsets from coordinates and features. The task network is corresponding to the speciﬁc task, such as point cloud recognition and reconstruction. $L_{task}$ is the loss constrained the task network.}
+\label{fig:fig2}
+\end{figure}
+
+\begin{multicols}{2}
 
 \section{Experiments}
 \subsection{Dataset and implementation details}
@@ -140,7 +153,7 @@ MLPs & (128,256,256) & (128,256,256) & (128,128,3) \\
 \captionsetup{labelformat=empty, justification=raggedright, labelsep=none}
 \caption{\RaggedRight The comparison on optimal clustering.}
 \label{table:table2}
-\begin{tabularx}{0.5\textwidth}{>{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X >{\centering\arraybackslash}X }
+\begin{tabularx}{0.5\textwidth}{>{\raggedleft\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X }
 \hline
 Center & Iterations & 1 & 10 & 100 \\
 \hline
@@ -155,13 +168,6 @@ The hyper-parameter $\lambda$ is tuned on the validation split of ShapeNet. Deta
 
 \subsection{Discussion about clustering}
 Except down-stream tasks such as reconstruction or recognition, down-sampled points can also be adopted as the initial clustering centers.
-\begin{figure*}
-\centering
- \includegraphics[width=\linewidth]{images/fig2.png}
- \captionsetup{justification=justified, labelsep=period}
- \caption{The whole pipeline of FPN. The + denotes element-wised addition. $f_1$ and $f_2$ aggregate features by MultiLayer Perceptrons(MLPs) and pooling, while $f_3$ is a group of MLPs to predict offsets from coordinates and features. The task network is corresponding to the speciﬁc task, such as point cloud recognition and reconstruction. $L_{task}$ is the loss constrained the task network.}
-\label{fig:fig2}
-\end{figure*}
 
 The results are presented in \autoref{table:table2}.
 
